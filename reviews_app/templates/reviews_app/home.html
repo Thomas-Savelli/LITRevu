@@ -1,4 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
     <p>Vous etes bien connecté</p>
+    <h2>Tickets</h2>
+    {% for ticket in tickets %}
+        <p>Créateur : {{ ticket.user }}</p>
+        <p> créer le : {{ ticket.time_created }}</p>
+        <img src="{{ ticket.image.url }}">
+        <p>{{ ticket.description }}</p>
+    {% endfor %}
 {% endblock content %}
