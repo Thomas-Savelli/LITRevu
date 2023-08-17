@@ -12,3 +12,9 @@ class SignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
         fields = ['username', 'email', 'first_name', 'last_name', 'role']
+
+
+class UploadProfilePhotoForm(forms.ModelForm):
+    class Meta:
+        model = get_user_model()
+        fields = ('profile_photo',)

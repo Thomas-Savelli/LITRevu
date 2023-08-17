@@ -14,11 +14,11 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth.views import (LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView)
 from django.urls import path
-from django.conf import settings
-from django.conf.urls.static import static
 
 import authentication.views
 import reviews_app.views
@@ -36,9 +36,10 @@ urlpatterns = [
     path('change_password_done/', PasswordChangeDoneView.as_view(
         template_name='authentication/password_change_done.html'),
         name='password_change_done'),
-    path('home/', reviews_app.views.home, name='home'),
     path('signup/', authentication.views.signup_page, name='signup'),
-    path('ticket/', reviews_app.views.ticket, name='ticket'),
+    path('profile_photo/upload', authentication.views.upload_profile_photo, name='upload_profile_photo'),
+    path('home/', reviews_app.views.home, name='home'),
+    path('ticket/add/', reviews_app.views.ticket_create, name='ticket_create'),
 ]
 
 if settings.DEBUG:

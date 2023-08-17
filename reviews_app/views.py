@@ -1,8 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
-from . import forms, models
-
+from . import models, forms
 # Create your views here.
 
 
@@ -13,7 +12,7 @@ def home(request):
 
 
 @login_required
-def ticket(request):
+def ticket_create(request):
     form = forms.TicketForm()
     if request.method == 'POST':
         form = forms.TicketForm(request.POST, request.FILES)
@@ -22,4 +21,4 @@ def ticket(request):
             ticket.user = request.user
             ticket.save()
             return redirect('home')
-    return render(request, 'reviews_app/ticket.html', context={'form': form})
+    return render(request, 'reviews_app/ticket_create.html', context={'form': form})

@@ -1,13 +1,28 @@
+{% load static %}
 <html>
     <head>
         <title>LITRevu</title>
+        <link rel="stylesheet" href="{% static 'app.css' %}">
     </head>
     <body>
-        <h1>LITRevu</h1>
-        {% block content%}{% endblock content %}
-        {% if user.is_authenticated %}
-            <p>Vous etes connecté en tant que {{ request.user }}. <a href="{% url 'logout' %}">Se déconnecter</a></p>
-            <p>Voulez-vous <a href="{% url 'password_change' %}">changer votre mot de passe ?</a></p>
-        {% endif %}
+        <div class="sidebar">
+            <h1>LITRevu</h1>
+            {% if user.is_authenticated %}
+                <p>Bonjour, {{ user }} !</p>
+                {% if user.profile_photo %}
+                    <img class="avatar" src="{{ user.profile_photo.url }}">
+                {% else %}
+                <img class="avatar" src="{% static 'images/default_profile.png'%}">
+                {% endif %}
+                <p><a href="{% url 'home' %}">Accueil</a></p>
+                <p><a href="{% url 'ticket_create' %}">Créer une demande de critique</a></p>
+                <p><a href="{% url 'upload_profile_photo' %}">Changer la photo de profil</a></p>
+                <p><a href="{% url 'password_change' %}">Changer le mot de passe</a></p>
+                <p><a href="{% url 'logout' %}">Se déconnecter</a></p>
+            {% endif %}
+        </div>
+        <div class="main">
+            {% block content%}{% endblock content %}
+        </div>
     </body>
 </html>
