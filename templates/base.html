@@ -15,7 +15,8 @@
                 <img class="avatar" src="{% static 'images/default_profile.png'%}">
                 {% endif %}
                 <p><a href="{% url 'home' %}">Accueil</a></p>
-                <p><a href="{% url 'ticket_create' %}">Créer une demande de critique</a></p>
+                <p><a href="{% url 'ticket_create' %}">Demander une critique</a></p>
+                <p><a href="{% url 'critique_create' %}">Créer une critique</a></p>
                 <p><a href="{% url 'upload_profile_photo' %}">Changer la photo de profil</a></p>
                 <p><a href="{% url 'password_change' %}">Changer le mot de passe</a></p>
                 <p><a href="{% url 'logout' %}">Se déconnecter</a></p>

@@ -52,7 +52,17 @@ html {
     text-align: center;
 }
 
-.post img {
-    width: 80%;
+.post {
+    border: red solid 2px;
+    background-color: #497979;
+    height: auto;
+    width: 50%;
+    padding-left: 2%;
+    margin-bottom: 2px;
+}
+
+.image_oeuvre {
+    width: 30%;
+    height: auto;
     border-radius: 5px;
 }

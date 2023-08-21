@@ -40,6 +40,7 @@ urlpatterns = [
     path('profile_photo/upload', authentication.views.upload_profile_photo, name='upload_profile_photo'),
     path('home/', reviews_app.views.home, name='home'),
     path('ticket/add/', reviews_app.views.ticket_create, name='ticket_create'),
+    path('critique/create', reviews_app.views.critique_and_ticket_create, name='critique_create'),
 ]
 
 if settings.DEBUG:
