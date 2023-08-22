@@ -10,8 +10,12 @@ class TicketForm(forms.ModelForm):
 
 
 class CritiqueForm(forms.ModelForm):
+    edit_critique = forms.BooleanField(widget=forms.HiddenInput, initial=True)
 
     class Meta:
         model = models.Critique
-        fields = ['headline', 'rating', 'body']
+        fields = ['commentaire', 'note', 'body']
 
+
+class DeleteCritiqueForm(forms.Form):
+    delete_critique = forms.BooleanField(widget=forms.HiddenInput, initial=True)

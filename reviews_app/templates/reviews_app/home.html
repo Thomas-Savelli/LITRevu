@@ -1,31 +1,27 @@
 {% extends 'base.html' %}
 {% block content %}
-    <p><a href="{% url 'ticket_create' %}">Demander une critique</a></p>
-    <p><a href="{% url 'critique_create' %}">Créer une critique</a></p>
-    <h2>Tickets</h2>
-    <div class="grid_container">
-        {% for ticket in tickets %}
-            <div class="post">
-                <p>{{ ticket.title }}</p>
-                <p>Créateur : {{ ticket.uploader }}</p>
-                <p> créer le : {{ ticket.time_created }}</p>
-                {% if ticket.image %}
-                        <img src="{{ ticket.image.url }}" class="image_oeuvre">
-                {% endif %}
-                <p>{{ ticket.description }}</p>
+    <div class="link_create">
+        <a href="{% url 'ticket_create' %}">Demander une critique</a>
+        <a href="{% url 'critique_create' %}">Créer une critique</a>
+    </div>
+    <h2>Votre Flux</h2>
+        {% for critique in critiques %}
+            <div class="critique_post">
+                <p>Créateur : {{ critique.user }}</p>
+                {{ critique.commentaire }}
+                {{ critique.note }}
+                {% for ticket in tickets %}
+                    <div class="ticket_post">
+                        {{ ticket.title }}
+                        <p>Créateur : {{ ticket.uploader }}</p>
+                        <p> créer le : {{ ticket.time_created }}</p>
+                        {% if ticket.image %}
+                                <img src="{{ ticket.image.url }}" class="image_oeuvre">
+                        {% endif %}
+                        <p>{{ ticket.description }}</p>
+                    </div>
+                {% endfor %}
             </div>
         {% endfor %}
-        {% for critique in critiques %}
-        <div class="post">
-            <p>{{ critique.title }}</p>
-            <p>Créateur : {{ critique.author }}</p>
-            <p> créer le : {{ critique.time_created }}</p>
-            {% if critique.image %}
-                    <img src="{{ critique.image.url }}" class="image_oeuvre">
-            {% endif %}
-            <p>{{ critique.body }}</p>
-        </div>
-    {% endfor %}
-    </div>
 {% endblock content %}
  

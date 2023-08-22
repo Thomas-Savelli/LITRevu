@@ -32,8 +32,33 @@ html {
 
 /* Style page content */
 .main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     margin-left: 240px; /* Same as the width of the sidebar */
     padding: 20px;
+}
+
+.link_create {
+    display: flex;
+    flex-direction: row;
+    gap: 400px;
+}
+
+.link_create a {
+    color: #1d3030;
+    margin-top: 20px;
+    text-decoration: none;
+}
+
+.critique_post {
+    background-color: red;
+    margin-bottom: 10px;
+}
+
+.ticket_post {
+    background-color: green;
 }
 
 .avatar {
@@ -45,24 +70,8 @@ html {
     padding-bottom: 10px;
 }
 
-.grid-container {
-    display: grid;
-    grid-template-columns: auto auto auto;
-    padding: 20px;
-    text-align: center;
-}
-
-.post {
-    border: red solid 2px;
-    background-color: #497979;
-    height: auto;
-    width: 50%;
-    padding-left: 2%;
-    margin-bottom: 2px;
-}
-
 .image_oeuvre {
     width: 30%;
     height: auto;
-    border-radius: 5px;
+    border-radius: 10px;
 }
