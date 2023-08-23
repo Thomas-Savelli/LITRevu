@@ -1,5 +1,7 @@
+from itertools import chain
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import Q
 
 from . import models, forms
 # Create your views here.
@@ -7,9 +9,12 @@ from . import models, forms
 
 @login_required
 def home(request):
-    tickets = models.Ticket.objects.all()
-    critiques = models.Critique.objects.all()
-    return render(request, 'reviews_app/home.html', context={'tickets': tickets, 'critiques': critiques})
+    critiques = models.Critique.objects.filter(
+        Q(contributors__in=request.user.follows.all()) | Q(note=True))
+    tickets = models.Ticket.objects.filter(
+        uploader__in=request.user.follows.all()).exclude(critique__in=critiques)
+    critiques_and_tickets = sorted(chain(critiques, tickets), key=lambda instance: instance.date_created, reverse=True)
+    return render(request, 'reviews_app/home.html', context={'critiques_and_tickets': critiques_and_tickets})
 
 
 @login_required
