@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django import forms
 
 from . import models
@@ -19,3 +20,12 @@ class CritiqueForm(forms.ModelForm):
 
 class DeleteCritiqueForm(forms.Form):
     delete_critique = forms.BooleanField(widget=forms.HiddenInput, initial=True)
+
+
+User = get_user_model()
+
+
+class FollowUsersForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['follows']

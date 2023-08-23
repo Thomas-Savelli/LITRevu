@@ -15,3 +15,8 @@ class User(AbstractUser):
 
     profile_photo = models.ImageField(verbose_name='Photo de profil')
     role = models.CharField(max_length=30, choices=ROLE_CHOICES, verbose_name='Role')
+    follows = models.ManyToManyField(
+        'self',
+        symmetrical=False,
+        verbose_name='suit',
+    )

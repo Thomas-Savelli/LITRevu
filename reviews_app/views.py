@@ -39,6 +39,7 @@ def critique_and_ticket_create(request):
             critique = critique_form.save(commit=False)
             critique.user = request.user
             critique.save()
+            critique.contributors.add(request.user, through_defaults={'contribution': 'Auteur principal'})
             return redirect('home')
 
     context = {
@@ -69,3 +70,14 @@ def edit_critique(request, critique_id):
         'delete_form': delete_form
     }
     return render(request, 'reviews_app/edit_critique.html', context=context)
+
+
+@login_required
+def follow_users(request):
+    form = forms.FollowUsersForm(instance=request.user)
+    if request.method == 'POST':
+        form = forms.FollowUsersForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    return render(request, 'reviews_app/follow_users_form.html', context={'form': form})
