@@ -27,6 +27,9 @@ class Ticket(models.Model):
         super().save(*args, **kwargs)
         self.resize_image()
 
+    def __str__(self):
+        return f'{self.title}'
+
 
 class Critique(models.Model):
     ticket = models.ForeignKey(to=Ticket, on_delete=models.CASCADE, null=True)
@@ -39,6 +42,9 @@ class Critique(models.Model):
     time_created = models.DateTimeField(auto_now_add=True)
     contributors = models.ManyToManyField(
         settings.AUTH_USER_MODEL, through='CritiqueContributor', related_name='contributions')
+
+    def __str__(self):
+        return f'{self.ticket}'
 
 
 class CritiqueContributor(models.Model):

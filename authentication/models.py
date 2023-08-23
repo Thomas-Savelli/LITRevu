@@ -20,3 +20,6 @@ class User(AbstractUser):
         symmetrical=False,
         verbose_name='suit',
     )
+
+    def __str__(self):
+        return f'{self.username}'

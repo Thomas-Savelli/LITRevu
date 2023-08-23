@@ -13,7 +13,7 @@ def home(request):
         Q(contributors__in=request.user.follows.all()) | Q(note=True))
     tickets = models.Ticket.objects.filter(
         uploader__in=request.user.follows.all()).exclude(critique__in=critiques)
-    critiques_and_tickets = sorted(chain(critiques, tickets), key=lambda instance: instance.date_created, reverse=True)
+    critiques_and_tickets = sorted(chain(critiques, tickets), key=lambda instance: instance.time_created, reverse=True)
     return render(request, 'reviews_app/home.html', context={'critiques_and_tickets': critiques_and_tickets})
 
 
@@ -69,11 +69,10 @@ def edit_critique(request, critique_id):
                 delete_form = forms.DeleteCritiqueForm(request.POST)
                 if delete_form.is_valid():
                     critique.delete()
-                    return redirect('home')
+                return redirect('home')
     context = {
         'edit_form': edit_form,
-        'delete_form': delete_form
-    }
+        'delete_form': delete_form}
     return render(request, 'reviews_app/edit_critique.html', context=context)
 
 
@@ -84,5 +83,5 @@ def follow_users(request):
         form = forms.FollowUsersForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('home')
+        return redirect('home')
     return render(request, 'reviews_app/follow_users_form.html', context={'form': form})
