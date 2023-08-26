@@ -52,15 +52,6 @@ html {
     text-decoration: none;
 }
 
-.critique_post {
-    background-color: red;
-    margin-bottom: 10px;
-}
-
-.ticket_post {
-    background-color: green;
-}
-
 .avatar {
     width: 80%;
     border-radius: 10%;

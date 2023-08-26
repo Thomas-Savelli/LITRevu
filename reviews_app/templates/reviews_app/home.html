@@ -1,27 +1,30 @@
 {% extends 'base.html' %}
+{% load reviews_app_extras %}
 {% block content %}
     <div class="link_create">
         <a href="{% url 'ticket_create' %}">Demander une critique</a>
         <a href="{% url 'critique_create' %}">Créer une critique</a>
     </div>
     <h2>Votre Flux</h2>
-        {% for critique in critiques %}
-            <div class="critique_post">
-                <p>Créateur : {{ critique.user }}</p>
-                {{ critique.commentaire }}
-                {{ critique.note }}
-                {% for ticket in tickets %}
-                    <div class="ticket_post">
-                        {{ ticket.title }}
-                        <p>Créateur : {{ ticket.uploader }}</p>
-                        <p> créer le : {{ ticket.time_created }}</p>
-                        {% if ticket.image %}
-                                <img src="{{ ticket.image.url }}" class="image_oeuvre">
-                        {% endif %}
-                        <p>{{ ticket.description }}</p>
-                    </div>
-                {% endfor %}
+    {% for instance in critiques_and_tickets %}
+        {% if instance|model_type == 'Critique' %}
+            <div class="post_critique">
+                <h4>Ticket : {{ instance.title }}</h4>
+                <img src="{{ instance.ticket.image.url }}">
+                <p><strong>Écrit par {{ instance.contributors.all|join:", " }}</strong></p>
+                <p>{{ instance.time_created }}</p>
             </div>
-        {% endfor %}
+        {% elif instance|model_type == 'Ticket' %}
+        <div class="post_ticket">
+            {% if instance.image %}
+                <img src="{{ instance.image.url }}">
+            {% endif %}
+            <p>{{ instance.description }}</p>
+            <p><strong>Créer par : {{ instance.uploader }}</strong></p>
+            <p>{{ instance.time_created }}</p>
+        </div>
+        {% endif %}
+    {% endfor %}
+    </div>
 {% endblock content %}
  
