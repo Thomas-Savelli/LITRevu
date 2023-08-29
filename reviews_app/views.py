@@ -14,8 +14,6 @@ def home(request):
     tickets = models.Ticket.objects.filter(
         uploader__in=request.user.follows.all()).exclude(critique__in=critiques)
     critiques_and_tickets = sorted(chain(critiques, tickets), key=lambda instance: instance.time_created, reverse=True)
-    print(request.user.follows.all())
-    print(request.user.followed_by.all())
     return render(request, 'reviews_app/home.html', context={'critiques_and_tickets': critiques_and_tickets})
 
 

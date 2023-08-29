@@ -4,10 +4,10 @@
     {% if form.errors %}
         {{ form.errors }}
     {% endif %}
-    <form method="post">
+    <form method="post" class="signup_form">
         {{ form.as_p }}
         {% csrf_token %}
         <button type="submit">S'inscrire</button>
+        <p class="sinon_login">Ou alors <a href="{% url 'login' %}">connectez-vous !</a></p>
     </form>
-    <p><a href="{% url 'login' %}">Se connecter</a></p>
 {% endblock content %}

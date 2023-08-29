@@ -5,7 +5,6 @@
         <a href="{% url 'ticket_create' %}">Demander une critique</a>
         <a href="{% url 'critique_create' %}">Créer une critique</a>
     </div>
-    <h2>Votre Flux</h2>
     {% for instance in critiques_and_tickets %}
         {% if instance|model_type == 'Critique' %}
             <div class="post_critique">
@@ -14,17 +13,30 @@
                 <p><strong>Écrit par {{ instance.contributors.all|join:", " }}</strong></p>
                 <p>{{ instance.time_created }}</p>
             </div>
+
+
         {% elif instance|model_type == 'Ticket' %}
         <div class="post_ticket">
+            <div class="head_ticket">
+                {% if instance.uploader == user %}
+                    <p>Vous avez demandé une critique</p>
+                {% else %}
+                    <p>{{ instance.uploader}} a demandé une critique</p>
+                {% endif %}
+                <p>{{ instance.time_created }}</p>
+            </div>
+            <p>{{ instance.title }}</p>
+            <p>{{ instance.description }}</p>
             {% if instance.image %}
                 <img src="{{ instance.image.url }}">
             {% endif %}
-            <p>{{ instance.description }}</p>
-            <p><strong>Créer par : {{ instance.uploader }}</strong></p>
-            <p>{{ instance.time_created }}</p>
+            {% if instance.uploader == user %}
+                <p><a href="{% url 'critique_create' %}">Créer une critique</a></p>
+            {% else %}
+                <p><a href="{% url 'critique_create' %}">Créer une critique</a></p>
+            {% endif %}
         </div>
         {% endif %}
     {% endfor %}
-    </div>
 {% endblock content %}
  

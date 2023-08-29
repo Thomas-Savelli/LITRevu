@@ -1,0 +1,193 @@
+/* forms.scss */
+
+/* Appliquer les styles de base aux champs de saisie et aux zones de texte */
+input[type="text"],
+textarea {
+    padding: 8px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    border: black solid 2px;
+    width: 100%;
+    height: auto;
+    // width: 100%; /* Utilisez cette ligne pour que les champs occupent toute la largeur */
+
+    /* Augmenter la taille du texte */
+    font-size: $fontsize_text;
+}
+
+.password_form {
+    flex-direction: column;
+    width:100%;
+    align-items: center;
+    margin-left: 30%;
+
+    /* Styles pour les labels */
+    label {
+        display: block;
+        color: $background_color;
+        font-size: $fontsize_titre2;
+        margin-bottom: 5px;
+        }
+    input[type="password"], 
+    textarea {
+        padding: 8px;
+        border-radius: 3px;
+        margin-bottom: 10px;
+        border: black solid 2px;
+        width: 40%;
+        height: auto;
+    }
+    button{
+        margin: 10%;
+        width: 20%;
+        height: 10%;
+        font-size: 22px;
+        border-radius: 5%;
+        margin-top: auto;
+        margin-bottom: 25px;
+        }
+    /* Augmenter la taille du texte */
+    font-size: $fontsize_text;
+}
+
+.confirmation_password_change {
+    text-align: center;
+    margin-top: 20%;
+    a{
+        text-decoration: none;
+        color: $background_color;
+        &:hover{
+            background-color: $background_color;
+            color: $color_base;
+        }
+    }
+}
+
+.change_profile_photo{
+    margin: auto;
+    margin-top: 4%;
+    margin-bottom: 4%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 80%;
+    gap: 10%;
+    font-size: $fontsize_text;
+    .profile_photo{
+        width: 30%;
+        height: auto;
+        border-radius: 10%;
+        box-shadow: -25px -49px 0px -7px rgba(200,132,28,0.73);
+    }
+    .profile_photo_form{
+        flex-direction: column;
+        align-self: center;
+        line-height: 2em;
+        button{
+            text-align: center;
+            margin-left: 40%;
+            margin-top: 10%;
+            width: 20%;
+            height: 10%;
+            font-size: 22px;
+            border-radius: 5%;
+            }
+    }
+}
+
+.login_form{
+    text-decoration: none;
+    margin: auto;
+    margin-top: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10%;
+    button{
+        width: 140px;
+        font-size: $fontsize_button;
+        margin-top: 8%;
+        margin-left: 35%;
+    }
+    input[type="password"], textarea{
+        padding: 8px;
+        border-radius: 3px;
+        margin-bottom: 10px;
+        border: black solid 2px;
+        width: 100%;
+        height: auto;
+        // width: 100%; /* Utilisez cette ligne pour que les champs occupent toute la largeur */
+
+        /* Augmenter la taille du texte */
+        font-size: $fontsize_text;
+    }
+}
+
+.signup_form{
+    text-decoration: none;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10%;
+    width: 40%;
+    label {
+        color: $background_color;
+        font-size: $fontsize_titre2;
+        display: block;
+        margin-bottom: 5px;
+    }
+    button, input[type="submit"]{
+        margin: auto;
+        width: 140px;
+        font-size: $fontsize_button;
+        margin-top: 8%;
+        margin-left: 35%;
+    }
+    input[type="password"],
+    input[type="email"],
+    textarea{
+        padding: 8px;
+        border-radius: 3px;
+        margin-bottom: 10px;
+        border: black solid 2px;
+        width: 100%;
+        height: auto;
+        // width: 100%; /* Utilisez cette ligne pour que les champs occupent toute la largeur */
+
+        /* Augmenter la taille du texte */
+        font-size: $fontsize_text;
+    }
+    .sinon_login{
+        text-align: center;
+    }
+}
+
+.ticket-form, .critique_form {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin: auto; /* Pour centrer le formulaire horizontalement */
+    /* Styles pour les labels */
+    label {
+        color: $background_color;
+        font-size: $fontsize_titre2;
+        display: block;
+        margin-bottom: 5px;
+    }
+    button{
+        width: 20%;
+        height: 10%;
+        font-size: 22px;
+        border-radius: 5%;
+        margin-top: auto;
+        align-self: flex-end; // Pour aligner le bouton à l'extrémité droite
+        margin-bottom: 25px;
+    }
+
+    input[type="file"] {
+        width: 20%;
+        height: 10%;
+        font-size: 18px;
+    }
+}

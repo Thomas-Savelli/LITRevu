@@ -7,7 +7,7 @@ from . import models
 class TicketForm(forms.ModelForm):
     class Meta:
         model = models.Ticket
-        fields = ['title', 'image', 'description']
+        fields = ['title', 'description', 'image']
 
 
 class CritiqueForm(forms.ModelForm):
