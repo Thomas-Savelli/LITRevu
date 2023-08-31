@@ -1,4 +1,5 @@
 {% load static %}
+
 <html>
     <head>
         <title>LITRevu</title>
@@ -14,6 +15,7 @@
                 <nav>
                     <ul>
                         <li><a href="{% url 'home' %}">Flux</a></li>
+                        <li><a href="{% url 'user_posts' %}">Post</a></li>
                         <li><a href="{% url 'follow_users' %}">Abonnements</a></li>
                         <li>
                             {% if user.profile_photo %}

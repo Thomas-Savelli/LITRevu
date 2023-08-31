@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Modifier la critique</h2>
-    <form method="post">
+    <h2>Modifier le ticket</h2>
+    <form method="post" enctype="multipart/form-data" class="critique_form">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Enregistrer</button>

@@ -26,6 +26,13 @@ User = get_user_model()
 
 
 class FollowUsersForm(forms.ModelForm):
+    search_user = forms.CharField(label='Recherher un utilisateur', max_length=100, required=False)
+
     class Meta:
         model = User
         fields = ['follows']
+
+
+class SearchUsersForm(forms.Form):
+    search_user = forms.CharField(label='Rechercher un utilisateur', max_length=100,
+                                  widget=forms.TextInput(attrs={'id': 'search-user'}))

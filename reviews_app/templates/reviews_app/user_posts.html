@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load reviews_app_extras %}
+
+{% block content %}
+    <h2>Vos posts</h2>
+
+    {% for data in combined_data %}
+
+        {% if data.ticket %}
+            <div class="post_ticket">
+                <p>Vous avez publié un ticket</p>
+                <p>{{ data.ticket.time_created }}</p>
+                <p>{{ data.ticket.title }}</p>
+                <p>{{ data.ticket.description }}</p>
+                {% if data.ticket.image %}
+                    <img src="{{ data.ticket.image.url }}">
+                {% endif %}
+
+                <a href="{% url 'ticket_edit' ticket_id=data.ticket.id %}">Modifier</a>
+                <a href="{% url 'ticket_delete' ticket_id=data.ticket.id %}">Supprimer</a>
+
+            </div>
+        {% endif %}
+
+        {% if data.critique %}
+            <div class="post_ticket">
+                <div class="head_ticket">
+                    <p>Vous avez publié une critique</p>
+                    <p>{{ data.critique.time_created }}</p>
+                </div>
+                <p>{{ data.critique.commentaire }}</p>
+                <p>{{ data.critique.note }}</p>
+                <p>{{ data.critique.body }}</p>
+
+                <a href="{% url 'critique_edit' critique_id=data.critique.id %}">Modifier</a>
+                <a href="{% url 'critique_delete' critique_id=data.critique.id %}">Supprimer</a>
+
+                <div class="post_ticket">                
+                    <div class="head_ticket">
+                    <p>{{ data.ticket.uploader }} a demandé une critique</p>
+                    <p>{{ data.ticket.time_created }}</p>
+                </div>
+                <p>{{ data.ticket.title }}</p>
+                <p>{{ data.ticket.description }}</p>
+                <p>
+                    {% if data.ticket.image %}
+                        <img src="{{ data.ticket.image.url }}">
+                    {% endif %}
+                </p>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endblock content %}

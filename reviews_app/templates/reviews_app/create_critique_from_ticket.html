@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Créer une critique</h2>
+
+    <div class='post_ticket'>
+        <p>Vous êtes en train de poster en réponse à</p>
+
+        <div class="head_ticket">
+                <p>{{ ticket.uploader }} a demandé une critique</p>
+                <p>{{ ticket.time_created }}</p>
+            </div>
+                <p>{{ ticket.title }}</p>
+                <p>{{ ticket.description}}</p>
+                <p>{% if ticket.image %}
+                    <img src="{{ ticket.image.url }}">
+                    {% endif %}
+                </p>
+        </div>
+        <form method="post" class="post_ticket">
+            {% csrf_token %}
+            {{ critique_form.as_p }}
+            <button type="submit">Créer la critique</button>
+        </form>
+    </div>
+{% endblock content %}

@@ -13,15 +13,17 @@ class Ticket(models.Model):
     uploader = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     image = models.ImageField(null=True, blank=True)
     time_created = models.DateTimeField(auto_now_add=True)
+    has_critique = models.BooleanField(default=False)
 
     IMAGE_MAX_SIZE = (800, 800)
 
     def resize_image(self):
-        image = Image.open(self.image)
-        image.thumbnail(self.IMAGE_MAX_SIZE)
-        # Sauvegarde de l 'image redimensionnée dans le systeme de fichier
-        # Ceci n'est pas la méthode save() du modele ...
-        image.save(self.image.path)
+        if self.image:
+            image = Image.open(self.image)
+            image.thumbnail(self.IMAGE_MAX_SIZE)
+            # Sauvegarde de l 'image redimensionnée dans le systeme de fichier
+            # Ceci n'est pas la méthode save() du modele ...
+            image.save(self.image.path)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)

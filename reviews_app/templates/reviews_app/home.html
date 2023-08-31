@@ -5,38 +5,42 @@
         <a href="{% url 'ticket_create' %}">Demander une critique</a>
         <a href="{% url 'critique_create' %}">Créer une critique</a>
     </div>
+    <h2>Fil d'actualité</h2>
+
     {% for instance in critiques_and_tickets %}
-        {% if instance|model_type == 'Critique' %}
-            <div class="post_critique">
-                <h4>Ticket : {{ instance.title }}</h4>
-                <img src="{{ instance.ticket.image.url }}">
-                <p><strong>Écrit par {{ instance.contributors.all|join:", " }}</strong></p>
+        {% if instance|model_type == 'Ticket' %}
+            <div class="post_ticket">
+                <p>{{ instance.uploader }} a demandé une critique</p>
                 <p>{{ instance.time_created }}</p>
-            </div>
-
-
-        {% elif instance|model_type == 'Ticket' %}
-        <div class="post_ticket">
-            <div class="head_ticket">
-                {% if instance.uploader == user %}
-                    <p>Vous avez demandé une critique</p>
-                {% else %}
-                    <p>{{ instance.uploader}} a demandé une critique</p>
+                <p>{{ instance.title }}</p>
+                <p>{{ instance.description }}</p>
+                {% if instance.image %}
+                    <img src="{{ instance.image.url }}">
                 {% endif %}
-                <p>{{ instance.time_created }}</p>
+                <p><a href="{% url 'create_critique_from_ticket' ticket_id=instance.id %}">Créer une critique</a></p>
             </div>
-            <p>{{ instance.title }}</p>
-            <p>{{ instance.description }}</p>
-            {% if instance.image %}
-                <img src="{{ instance.image.url }}">
-            {% endif %}
-            {% if instance.uploader == user %}
-                <p><a href="{% url 'critique_create' %}">Créer une critique</a></p>
-            {% else %}
-                <p><a href="{% url 'critique_create' %}">Créer une critique</a></p>
-            {% endif %}
-        </div>
+        {% endif %}
+
+        {% if instance|model_type == 'Critique' %}
+            <div class="post_ticket">
+                <div class="head_ticket">
+                    <p>{{ instance.author }} a publié une critique</p>
+                    <p>{{ instance.time_created }}</p>
+                </div>
+                <p>{{ instance.commentaire }}</p>
+                <p>{{ instance.note }}</p>
+                <p>{{ instance.body }}</p>
+                <div class="post_ticket">
+                    <p>Ticket associé :</p>
+                    <p>{{ instance.ticket.title }}</p>
+                    <p>{{ instance.ticket.description }}</p>
+                    <p>
+                        {% if instance.ticket.image %}
+                            <img src="{{ instance.ticket.image.url }}">
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
         {% endif %}
     {% endfor %}
 {% endblock content %}
- 

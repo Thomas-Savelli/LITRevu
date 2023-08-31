@@ -1,9 +1,12 @@
 from itertools import chain
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import JsonResponse
 from django.db.models import Q
 
 from . import models, forms
+from .forms import SearchUsersForm
+from authentication.models import User
 # Create your views here.
 
 
@@ -12,9 +15,14 @@ def home(request):
     critiques = models.Critique.objects.filter(
         Q(contributors__in=request.user.follows.all()) | Q(note=True))
     tickets = models.Ticket.objects.filter(
-        uploader__in=request.user.follows.all()).exclude(critique__in=critiques)
+        Q(uploader__in=request.user.follows.all()) | Q(critique__in=critiques)).distinct()
+
     critiques_and_tickets = sorted(chain(critiques, tickets), key=lambda instance: instance.time_created, reverse=True)
-    return render(request, 'reviews_app/home.html', context={'critiques_and_tickets': critiques_and_tickets})
+
+    context = {
+        'critiques_and_tickets': critiques_and_tickets,
+    }
+    return render(request, 'reviews_app/home.html', context=context)
 
 
 @login_required
@@ -31,12 +39,36 @@ def ticket_create(request):
 
 
 @login_required
+def create_critique_from_ticket(request, ticket_id):
+    ticket = get_object_or_404(models.Ticket, id=ticket_id)
+    critique_form = forms.CritiqueForm()
+
+    if request.method == 'POST':
+        critique_form = forms.CritiqueForm(request.POST)
+        if critique_form.is_valid():
+            critique = critique_form.save(commit=False)
+            critique.author = request.user
+            critique.ticket = ticket
+            critique.save()
+            critique.contributors.add(request.user, through_defaults={'contribution': 'Auteur principal'})
+            return redirect('home')
+
+    context = {
+        'critique_form': critique_form,
+        'ticket': ticket,
+    }
+    return render(request, 'reviews_app/create_critique_from_ticket.html', context=context)
+
+
+@login_required
 def critique_and_ticket_create(request):
     critique_form = forms.CritiqueForm()
     ticket_form = forms.TicketForm()
+
     if request.method == 'POST':
         critique_form = forms.CritiqueForm(request.POST)
         ticket_form = forms.TicketForm(request.POST, request.FILES)
+
         if all([critique_form.is_valid(), ticket_form.is_valid()]):
             ticket = ticket_form.save(commit=False)
             ticket.uploader = request.user
@@ -54,34 +86,130 @@ def critique_and_ticket_create(request):
     return render(request, 'reviews_app/create_critique_post.html', context=context)
 
 
+# Vue pour éditer un ticket
+@login_required
+def edit_ticket(request, ticket_id):
+    ticket = get_object_or_404(models.Ticket, id=ticket_id)
+    if request.user != ticket.uploader:
+        return redirect('user_posts')
+
+    if request.method == 'POST':
+        form = forms.TicketForm(request.POST, instance=ticket)
+        if form.is_valid():
+            form.save()
+            return redirect('user_posts')
+    else:
+        form = forms.TicketForm(instance=ticket)
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'reviews_app/edit_ticket.html', context)
+
+
+# Vue pour supprimer un ticket
+@login_required
+def delete_ticket(request, ticket_id):
+    ticket = get_object_or_404(models.Ticket, id=ticket_id)
+    if request.user == ticket.uploader:
+        if request.method == 'POST':
+            ticket.delete()
+            return redirect('user_posts')
+        return render(request, 'reviews_app/ticket_delete.html')
+    else:
+        return redirect('user_posts')
+
+
+# Vue pour éditer une critique
 @login_required
 def edit_critique(request, critique_id):
     critique = get_object_or_404(models.Critique, id=critique_id)
-    edit_form = forms.CritiqueForm(instance=critique)
-    delete_form = forms.DeleteCritiqueForm()
+    if request.user != critique.author:
+        return redirect('user_posts')
+
     if request.method == 'POST':
-        if 'edit_critique' in request.POST:
-            edit_form = forms.CritiqueForm(request.POST, instance=critique)
-            if edit_form.is_valid():
-                edit_form.save()
-                return redirect('home')
-            if 'delete_critique' in request.POST:
-                delete_form = forms.DeleteCritiqueForm(request.POST)
-                if delete_form.is_valid():
-                    critique.delete()
-                    return redirect('home')
+        form = forms.CritiqueForm(request.POST, instance=critique)
+        if form.is_valid():
+            form.save()
+            return redirect('user_posts')
+    else:
+        form = forms.CritiqueForm(instance=critique)
+
     context = {
-        'edit_form': edit_form,
-        'delete_form': delete_form}
-    return render(request, 'reviews_app/edit_critique.html', context=context)
+        'form': form,
+    }
+    return render(request, 'reviews_app/edit_critique.html', context)
+
+
+@login_required
+def delete_critique(request, critique_id):
+    critique = get_object_or_404(models.Critique, id=critique_id)
+    if request.user == critique.author:
+        if request.method == 'POST':
+            critique.delete()
+            return redirect('user_posts')
+        return render(request, 'reviews_app/critique_delete.html')
+    else:
+        return redirect('user_posts')
+
+
+@login_required
+def user_posts(request):
+    user = request.user
+    user_tickets = models.Ticket.objects.filter(uploader=user)
+    user_critiques = models.Critique.objects.filter(author=user)
+
+    # Combinez les données dans une liste
+    combined_data = []
+    for critique in user_critiques:
+        combined_data.append({'critique': critique, 'ticket': critique.ticket})
+    for ticket in user_tickets:
+        combined_data.append({'ticket': ticket})
+
+    # Triez la liste combinée par ordre décroissant de time_created
+    combined_data.sort(key=lambda data: data.get('critique', data['ticket']).time_created, reverse=True)
+
+    context = {
+        'combined_data': combined_data,
+    }
+    return render(request, 'reviews_app/user_posts.html', context=context)
 
 
 @login_required
 def follow_users(request):
-    form = forms.FollowUsersForm(instance=request.user)
+    search_results = []
+
     if request.method == 'POST':
-        form = forms.FollowUsersForm(request.POST, instance=request.user)
-        if form.is_valid():
-            form.save()
-        return redirect('home')
-    return render(request, 'reviews_app/follow_users_form.html', context={'form': form})
+        search_user = request.POST.get('search_user', '').strip()
+        if search_user:
+            search_results = User.objects.filter(username__icontains=search_user).exclude(id=request.user.id)
+
+        else:
+            user_id = request.POST.get('user_id')
+            if user_id:
+                user_to_follow = get_object_or_404(User, id=user_id)
+                request.user.follows.add(user_to_follow)
+
+    return render(request, 'reviews_app/follow_users_form.html', {'search_results': search_results})
+
+
+@login_required
+def unfollow_user(request, user_id):
+    user_to_unfollow = get_object_or_404(User, id=user_id)
+    if request.user in user_to_unfollow.followed_by.all():
+        request.user.follows.remove(user_to_unfollow)
+    return redirect('follow_users')
+
+
+@login_required
+def search_users(request):
+    if request.method == 'POST':
+        search_form = forms.SearchUsersForm(request.POST)
+        if search_form.is_valid():
+            query = search_form.cleaned_data['search_user']
+            users = User.objects.filter(username__icontains=query)
+            users_list = [{'username': user.username} for user in users]
+            return JsonResponse({'users': users_list})
+    else:
+        search_form = SearchUsersForm()
+    return render(request, 'reviews_app/follow_users_form.html', {'search_form': search_form})

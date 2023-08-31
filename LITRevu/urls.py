@@ -41,8 +41,18 @@ urlpatterns = [
     path('home/', reviews_app.views.home, name='home'),
     path('ticket/add/', reviews_app.views.ticket_create, name='ticket_create'),
     path('critique/create', reviews_app.views.critique_and_ticket_create, name='critique_create'),
-    path('critique/<int:critique_id>/edit', reviews_app.views.edit_critique, name='edit_critique'),
+    path('create_critique/<int:ticket_id>/', reviews_app.views.create_critique_from_ticket,
+         name='create_critique_from_ticket'),
+    path('user/posts/', reviews_app.views.user_posts, name='user_posts'),
+
+    path('ticket/<int:ticket_id>/edit/', reviews_app.views.edit_ticket, name='ticket_edit'),
+    path('ticket/<int:ticket_id>/delete/', reviews_app.views.delete_ticket, name='ticket_delete'),
+    path('critique/<int:critique_id>/edit/', reviews_app.views.edit_critique, name='critique_edit'),
+    path('critique/<int:critique_id>/delete/', reviews_app.views.delete_critique, name='critique_delete'),
+
     path('follow-users/', reviews_app.views.follow_users, name='follow_users'),
+    path('unfollow-user/<int:user_id>/', reviews_app.views.unfollow_user, name='unfollow_user'),
+    path('search-users/', reviews_app.views.search_users, name='search_users'),
 ]
 
 if settings.DEBUG:
