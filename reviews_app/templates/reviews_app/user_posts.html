@@ -6,7 +6,7 @@
 
     {% for data in combined_data %}
 
-        {% if data.ticket %}
+        {% if data|model_type == 'Ticket' %}
             <div class="post_ticket">
                 <p>Vous avez publié un ticket</p>
                 <p>{{ data.ticket.time_created }}</p>
@@ -22,7 +22,7 @@
             </div>
         {% endif %}
 
-        {% if data.critique %}
+        {% if data|model_type == 'Critique' %}
             <div class="post_ticket">
                 <div class="head_ticket">
                     <p>Vous avez publié une critique</p>

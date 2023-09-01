@@ -12,10 +12,12 @@ from authentication.models import User
 
 @login_required
 def home(request):
+    # critiques = models.Critique.objects.filter(
+    #     Q(contributors__in=request.user.follows.all()) | Q(note=True))
+    tickets = models.Ticket.objects.filter(uploader__in=request.user.follows.all())
     critiques = models.Critique.objects.filter(
-        Q(contributors__in=request.user.follows.all()) | Q(note=True))
-    tickets = models.Ticket.objects.filter(
-        Q(uploader__in=request.user.follows.all()) | Q(critique__in=critiques)).distinct()
+        Q(contributors__in=request.user.follows.all()) | Q(ticket__in=tickets)
+        )
 
     critiques_and_tickets = sorted(chain(critiques, tickets), key=lambda instance: instance.time_created, reverse=True)
 
@@ -157,22 +159,17 @@ def delete_critique(request, critique_id):
 def user_posts(request):
     user = request.user
     user_tickets = models.Ticket.objects.filter(uploader=user)
+    print(user_tickets)
     user_critiques = models.Critique.objects.filter(author=user)
 
-    # Combinez les données dans une liste
-    combined_data = []
-    for critique in user_critiques:
-        combined_data.append({'critique': critique, 'ticket': critique.ticket})
-    for ticket in user_tickets:
-        combined_data.append({'ticket': ticket})
-
-    # Triez la liste combinée par ordre décroissant de time_created
-    combined_data.sort(key=lambda data: data.get('critique', data['ticket']).time_created, reverse=True)
+    critiques_and_tickets = sorted(chain(user_critiques, user_tickets),
+                                   key=lambda instance: instance.time_created, reverse=True)
 
     context = {
-        'combined_data': combined_data,
+        'critiques_and_tickets': critiques_and_tickets,
     }
-    return render(request, 'reviews_app/user_posts.html', context=context)
+
+    return render(request, 'reviews_app/home.html', context=context)
 
 
 @login_required
