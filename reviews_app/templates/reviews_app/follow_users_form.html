@@ -2,45 +2,60 @@
 {% block content %}
     <!-- Vue pour rechercher des utilisateurs afin de s'y abonner -->
     <h2>Suivre d'autres utilisateurs</h2>
-    <form method="post">
-        {% csrf_token %}
-        <label for="search_user">Rechercher un utilisateur :</label>
-        <input type="text" name="search_user" id="search-user">
-        <button type="submit">Rechercher</button>
-    </form>
+    <div class="search-user">
+        <form method="post">
+            {% csrf_token %}
+            <label for="search_user">Rechercher un utilisateur :</label>
+            <input type="text" name="search_user" id="search-user">
+            <button type="submit" class="search_button">Rechercher</button>
+        </form>
 
-    {% if search_results %}
-        <h3>Résultats de la recherche :</h3>
-        <ul>
-            {% for user in search_results %}
-                <li>
-                    {{ user.username }}
-                    <form method="post" action="{% url 'follow_users' %}">
-                        {% csrf_token %}
-                        <input type="hidden" name="user_id" value="{{ user.id }}">
-                        <button type="submit">Suivre</button>
-                    </form>
-                </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+        {% if search_results %}
+            <h2>Résultats de la recherche :</h2>
+            <div class="search_results">
+            <ul>
+                {% for user in search_results %}
+                    <li>
+                        {{ user.username }}
+                        <form method="post" action="{% url 'follow_users' %}">
+                            {% csrf_token %}
 
-    <h2>Utilisateurs que vous suivez :</h2>
-    <ul>
-        {% for user in request.user.follows.all %}
-            <li>
-                {{ user.username }}
-                <form method="post" action="{% url 'unfollow_user' user.pk %}">
-                    {% csrf_token %}
-                    <button type="submit">Ne plus suivre</button>
-                </form>
-            </li>
-        {% endfor %}
-    </ul>
+                                <input type="hidden" name="user_id" value="{{ user.id }}">
+                                <button type="submit">Suivre</button>
 
-    <!-- Vue pour les utilisateurs qui nous suivent -->
-    <h2>Abonnés</h2>
-    {% for user in request.user.followed_by.all %}
-        <p>{{ user.username }}</p>
-    {% endfor %}
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+            </div>
+        {% endif %}
+
+        <div class="follow_list">
+            <div class="user_followlist">
+                <h2>Utilisateurs suivis</h2>
+                <ul>
+                    {% for user in request.user.follows.all %}
+
+                        <li>
+                            {{ user.username }}
+                            <form method="post" action="{% url 'unfollow_user' user.pk %}">
+                                {% csrf_token %}
+                                <button type="submit">Ne plus suivre</button>
+                            </form>
+                        </li>
+
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="followed_list">
+                <!-- Vue pour les utilisateurs qui nous suivent -->
+                <h2>Abonnés</h2>
+                <ul>
+                {% for user in request.user.followed_by.all %}
+                    <li>{{ user.username }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
 {% endblock content %}

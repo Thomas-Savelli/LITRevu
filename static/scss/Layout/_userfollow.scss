@@ -1,0 +1,38 @@
+.search-user {
+    align-self: center;
+    width: 40%;
+    height: auto;
+    .search_button{
+        margin-left: 42%;
+    }
+    .search_results{
+        li{
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+    }
+}
+
+.follow_list{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20%;
+    margin-top: 10%;
+    h2 {
+        margin: 0;
+    }
+    .user_followlist{
+        li{
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+    .followed_list{
+       li{
+        list-style: none;
+       }
+    }
+}

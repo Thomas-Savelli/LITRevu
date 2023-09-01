@@ -341,39 +341,6 @@ textarea {
 }
 
 .search-user {
-  align-self: center;
-  width: 40%;
+  width: 60%;
   height: auto;
-}
-
-.search-user .search_button {
-  margin-left: 42%;
-}
-
-.search-user .search_results li {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
-
-.follow_list {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 20%;
-  margin-top: 10%;
-}
-
-.follow_list h2 {
-  margin: 0;
-}
-
-.follow_list .user_followlist li {
-  list-style: none;
-  display: flex;
-  justify-content: space-between;
-}
-
-.follow_list .followed_list li {
-  list-style: none;
 }
