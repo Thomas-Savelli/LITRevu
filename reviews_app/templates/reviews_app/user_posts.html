@@ -4,51 +4,45 @@
 {% block content %}
     <h2>Vos posts</h2>
 
-    {% for data in combined_data %}
+    {% for instance in critiques_and_tickets %}
+    {% if instance|model_type == 'Ticket' %}
+        <div class="post_ticket">
+            <p>{{ instance.uploader }} a demandé une critique</p>
+            <p>{{ instance.time_created }}</p>
+            <p>{{ instance.title }}</p>
+            <p>{{ instance.description }}</p>
+            {% if instance.image %}
+                <img src="{{ instance.image.url }}">
+            {% endif %}
+            <a href="{% url 'ticket_edit' ticket_id=instance.id %}">Modifier</a>
+            <a href="{% url 'ticket_delete' ticket_id=instance.id %}">Supprimer</a>
 
-        {% if data|model_type == 'Ticket' %}
-            <div class="post_ticket">
-                <p>Vous avez publié un ticket</p>
-                <p>{{ data.ticket.time_created }}</p>
-                <p>{{ data.ticket.title }}</p>
-                <p>{{ data.ticket.description }}</p>
-                {% if data.ticket.image %}
-                    <img src="{{ data.ticket.image.url }}">
-                {% endif %}
+            {% if instance.id not in tickets_with_critique %}
+                <p><a href="{% url 'create_critique_from_ticket' ticket_id=instance.id %}">Créer une critique</a></p>
+            {% endif %}
 
-                <a href="{% url 'ticket_edit' ticket_id=data.ticket.id %}">Modifier</a>
-                <a href="{% url 'ticket_delete' ticket_id=data.ticket.id %}">Supprimer</a>
+        </div>
+    {% endif %}
 
+    {% if instance|model_type == 'Critique' %}
+        <div class="post_ticket">
+            <div class="head_ticket">
+                <p>{{ instance.author }} a publié une critique</p>
+                <p>{{ instance.time_created }}</p>
             </div>
-        {% endif %}
-
-        {% if data|model_type == 'Critique' %}
+            <p>{{ instance.commentaire }}</p>
+            <p>{{ instance.note }}</p>
+            <p>{{ instance.body }}</p>
             <div class="post_ticket">
-                <div class="head_ticket">
-                    <p>Vous avez publié une critique</p>
-                    <p>{{ data.critique.time_created }}</p>
-                </div>
-                <p>{{ data.critique.commentaire }}</p>
-                <p>{{ data.critique.note }}</p>
-                <p>{{ data.critique.body }}</p>
-
-                <a href="{% url 'critique_edit' critique_id=data.critique.id %}">Modifier</a>
-                <a href="{% url 'critique_delete' critique_id=data.critique.id %}">Supprimer</a>
-
-                <div class="post_ticket">                
-                    <div class="head_ticket">
-                    <p>{{ data.ticket.uploader }} a demandé une critique</p>
-                    <p>{{ data.ticket.time_created }}</p>
-                </div>
-                <p>{{ data.ticket.title }}</p>
-                <p>{{ data.ticket.description }}</p>
-                <p>
-                    {% if data.ticket.image %}
-                        <img src="{{ data.ticket.image.url }}">
+                <p>Ticket associé : {{ instance.ticket.uploader }}</p>
+                <p>{{ instance.ticket.title }}</p>
+                <p>{{ instance.ticket.description }}</p>
+                    {% if instance.ticket.image %}
+                        <img src="{{ instance.ticket.image.url }}">
                     {% endif %}
                 </p>
-                </div>
             </div>
-        {% endif %}
-    {% endfor %}
+        </div>
+        {% endif %} 
+{% endfor %}
 {% endblock content %}

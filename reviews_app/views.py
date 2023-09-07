@@ -158,18 +158,36 @@ def delete_critique(request, critique_id):
 @login_required
 def user_posts(request):
     user = request.user
-    user_tickets = models.Ticket.objects.filter(uploader=user)
-    print(user_tickets)
-    user_critiques = models.Critique.objects.filter(author=user)
+    print("Utilisateur connecté :", user)  # Ajoutez cette ligne
 
+    user_tickets = models.Ticket.objects.filter(uploader=user)
+    print("Tickets de l'utilisateur :", user_tickets)  # Ajoutez cette ligne
+
+    user_critiques = models.Critique.objects.filter(author=user)
+    print("Critiques de l'utilisateur :", user_critiques)  # Ajoutez cette ligne
+
+    # Créez une liste pour stocker les IDs des tickets pour lesquels l'utilisateur a créé une critique
+    tickets_with_critique = []
+
+    # Parcourez les tickets pour vérifier si l'utilisateur a créé une critique pour chaque ticket
+    for ticket in user_tickets:
+        if models.Critique.objects.filter(ticket=ticket, author=user).exists():
+            # Si l'utilisateur a créé une critique pour ce ticket, ajoutez son ID à la liste
+            tickets_with_critique.append(ticket.id)
+
+    # Créez une liste qui combine les critiques et les tickets de l'utilisateur
     critiques_and_tickets = sorted(chain(user_critiques, user_tickets),
                                    key=lambda instance: instance.time_created, reverse=True)
 
+    for instance in critiques_and_tickets:
+        print("ID de l'instance :", instance.id)  # Ajoutez cette ligne
+
     context = {
         'critiques_and_tickets': critiques_and_tickets,
+        'tickets_with_critique': tickets_with_critique,
     }
 
-    return render(request, 'reviews_app/home.html', context=context)
+    return render(request, 'reviews_app/user_posts.html', context=context)
 
 
 @login_required
