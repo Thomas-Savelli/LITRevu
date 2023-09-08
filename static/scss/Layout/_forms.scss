@@ -184,11 +184,16 @@ textarea {
         align-self: flex-end; // Pour aligner le bouton à l'extrémité droite
         margin-bottom: 25px;
     }
-
-    input[type="file"] {
-        width: 20%;
-        height: 10%;
-        font-size: 18px;
-    }
 }
   
+.form_delete{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: $color_base_2 solid 2px;
+    width: 50%;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

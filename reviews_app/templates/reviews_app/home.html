@@ -17,8 +17,8 @@
                 {% if instance.image %}
                     <img src="{{ instance.image.url }}">
                 {% endif %}
-                <p><a href="{% url 'create_critique_from_ticket' ticket_id=instance.id %}">Créer une critique</a></p>
-            </div>
+                    <p><a href="{% url 'create_critique_from_ticket' ticket_id=instance.id %}">Créer une critique</a></p>
+                </div>
         {% endif %}
 
         {% if instance|model_type == 'Critique' %}
@@ -31,7 +31,7 @@
                 <p>{{ instance.note }}</p>
                 <p>{{ instance.body }}</p>
                 <div class="post_ticket">
-                    <p>Ticket associé :</p>
+                    <p>Ticket associé : {{ instance.ticket.uploader }}</p>
                     <p>{{ instance.ticket.title }}</p>
                     <p>{{ instance.ticket.description }}</p>
                         {% if instance.ticket.image %}

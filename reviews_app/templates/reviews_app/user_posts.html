@@ -14,12 +14,14 @@
             {% if instance.image %}
                 <img src="{{ instance.image.url }}">
             {% endif %}
-            <a href="{% url 'ticket_edit' ticket_id=instance.id %}">Modifier</a>
-            <a href="{% url 'ticket_delete' ticket_id=instance.id %}">Supprimer</a>
-
-            {% if instance.id not in tickets_with_critique %}
-                <p><a href="{% url 'create_critique_from_ticket' ticket_id=instance.id %}">Créer une critique</a></p>
-            {% endif %}
+            <div class="button_post_action">
+                {% if instance.id not in tickets_with_critique %}
+                    <p><a href="{% url 'create_critique_from_ticket' ticket_id=instance.id %}" class="button_create_critique">Créer une critique</a></p>
+                {% endif %}
+                <a href="{% url 'ticket_edit' ticket_id=instance.id %}">Modifier</a>
+                <a href="{% url 'ticket_delete' ticket_id=instance.id %}">Supprimer</a>
+            </div>
+           
 
         </div>
     {% endif %}
@@ -41,6 +43,10 @@
                         <img src="{{ instance.ticket.image.url }}">
                     {% endif %}
                 </p>
+            </div>
+            <div class="button_post_action">
+                <a href="{% url 'critique_edit' critique_id=instance.id %}">Modifier</a>
+                <a href="{% url 'critique_delete' critique_id=instance.id %}">Supprimer</a>
             </div>
         </div>
         {% endif %} 

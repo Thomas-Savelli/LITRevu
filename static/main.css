@@ -22,7 +22,7 @@ body {
 }
 
 .header nav {
-  margin-left: 52%;
+  margin-left: 42%;
 }
 
 .header nav ul {
@@ -79,19 +79,6 @@ body {
   margin-right: 30px;
 }
 
-#main {
-  display: flex;
-  flex-direction: column;
-}
-
-#main h2 {
-  font-family: "Special Elite", cursive;
-  color: #C8841C;
-  text-align: center;
-  font-size: 30px;
-  margin-top: 3%;
-}
-
 .link_create {
   display: flex;
   flex-direction: row;
@@ -112,9 +99,91 @@ body {
   border-radius: 5px;
 }
 
+.button_post_action {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: right;
+  gap: 5%;
+}
+
+.button_post_action a {
+  text-decoration: none;
+  border: red solid 2px;
+  border-radius: 10px;
+  padding: 10px 10px 10px 10px;
+  background-color: red;
+  color: white;
+}
+
+.button_post_action a:hover {
+  color: red;
+  background-color: white;
+  border: red solid 2px;
+}
+
+.button_post_action a:active {
+  color: white;
+  background-color: red;
+}
+
+.button_post_action .button_create_critique {
+  background-color: #C8841C;
+  border: #C8841C solid 2px;
+}
+
+.button_post_action .button_create_critique:hover {
+  color: #C8841C;
+  background-color: white;
+  border: #C8841C solid 2px;
+}
+
+.button_post_action .button_create_critique:active {
+  color: white;
+  background-color: #C8841C;
+  border: #C8841C solid 2px;
+}
+
+button[type='submit'] {
+  color: white;
+  background-color: red;
+  font-size: 20px;
+  padding: 10px 10px 10px 10px;
+  border: red;
+  border-radius: 10px;
+}
+
+input[type="file"] {
+  width: 100%;
+  height: 10%;
+  font-size: 20px;
+}
+
+.button_comeback {
+  text-decoration: none;
+  text-align: center;
+  font-size: 20px;
+  color: #C8841C;
+  margin-bottom: 20px;
+}
+
+#main {
+  display: flex;
+  flex-direction: column;
+}
+
+#main h2 {
+  font-family: "Special Elite", cursive;
+  color: #C8841C;
+  text-align: center;
+  font-size: 30px;
+  margin-top: 3%;
+}
+
 .post_ticket {
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 30px;
   width: 60%;
   height: auto;
   font-size: 18px;
@@ -129,12 +198,17 @@ body {
 }
 
 .post_ticket img {
-  width: 40%;
+  width: 20%;
   height: auto;
 }
 
-.post_critique {
-  width: 80%;
+.post_ticket a {
+  text-decoration: none;
+  border: red solid 2px;
+  border-radius: 10px;
+  padding: 10px 10px 10px 10px;
+  background-color: red;
+  color: white;
 }
 
 /* forms.scss */
@@ -334,10 +408,16 @@ textarea {
   margin-bottom: 25px;
 }
 
-.ticket-form input[type="file"], .critique_form input[type="file"] {
-  width: 20%;
-  height: 10%;
-  font-size: 18px;
+.form_delete {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: black solid 2px;
+  width: 50%;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .search-user {

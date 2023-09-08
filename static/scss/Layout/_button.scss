@@ -1,0 +1,80 @@
+.link_create {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    gap: 20%;
+    a {
+        text-decoration: none;
+        font-size: $fontsize_button;
+        padding: 10px 20px 10px 20px;
+        border: $background_color solid 2px;
+        background-color: $background_color;
+        color: $color_base;
+        border-radius: 5px;
+    }
+}
+
+.button_post_action{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: right;
+    gap: 5%;
+    a{
+        text-decoration: none;
+        border: $color_base_3 solid 2px;
+        border-radius: 10px;
+        padding: 10px 10px 10px 10px;
+        background-color: $color_base_3;
+        color: $color_base;
+        &:hover{
+            color: $color_base_3;
+            background-color: $color_base;
+            border: $color_base_3 solid 2px;
+        }
+        &:active{
+            color: $color_base;
+            background-color: $color_base_3;
+        }
+    }
+    .button_create_critique{
+        background-color: $background_color;
+        border: $background_color solid 2px;
+        &:hover{
+            color: $background_color;
+            background-color: $color_base;
+            border: $background_color solid 2px;
+        }
+        &:active{
+            color: $color_base;
+            background-color: $background_color;
+            border: $background_color solid 2px;
+        }
+    }
+}
+
+button[type='submit']{
+    color: $color_base;
+    background-color: $color_base_3;
+    font-size: $fontsize_button;
+    padding: 10px 10px 10px 10px;
+    border: $color_base_3;
+    border-radius: 10px;
+}
+
+input[type="file"] {
+    width: 100%;
+    height: 10%;
+    font-size: $fontsize_button;
+}
+
+.button_comeback{
+    text-decoration: none;
+    text-align: center;
+    font-size: $fontsize_button;
+    color: $background_color;
+    margin-bottom: 20px;
+}

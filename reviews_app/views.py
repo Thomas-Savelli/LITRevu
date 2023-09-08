@@ -12,8 +12,6 @@ from authentication.models import User
 
 @login_required
 def home(request):
-    # critiques = models.Critique.objects.filter(
-    #     Q(contributors__in=request.user.follows.all()) | Q(note=True))
     tickets = models.Ticket.objects.filter(uploader__in=request.user.follows.all())
     critiques = models.Critique.objects.filter(
         Q(contributors__in=request.user.follows.all()) | Q(ticket__in=tickets)
@@ -158,13 +156,8 @@ def delete_critique(request, critique_id):
 @login_required
 def user_posts(request):
     user = request.user
-    print("Utilisateur connecté :", user)  # Ajoutez cette ligne
-
     user_tickets = models.Ticket.objects.filter(uploader=user)
-    print("Tickets de l'utilisateur :", user_tickets)  # Ajoutez cette ligne
-
     user_critiques = models.Critique.objects.filter(author=user)
-    print("Critiques de l'utilisateur :", user_critiques)  # Ajoutez cette ligne
 
     # Créez une liste pour stocker les IDs des tickets pour lesquels l'utilisateur a créé une critique
     tickets_with_critique = []
@@ -178,9 +171,6 @@ def user_posts(request):
     # Créez une liste qui combine les critiques et les tickets de l'utilisateur
     critiques_and_tickets = sorted(chain(user_critiques, user_tickets),
                                    key=lambda instance: instance.time_created, reverse=True)
-
-    for instance in critiques_and_tickets:
-        print("ID de l'instance :", instance.id)  # Ajoutez cette ligne
 
     context = {
         'critiques_and_tickets': critiques_and_tickets,
