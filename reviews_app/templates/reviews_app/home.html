@@ -32,7 +32,14 @@
                     <p>{{ instance.time_created }}</p>
                 </div>
                 <p>{{ instance.commentaire }}</p>
-                <p>{{ instance.note }}</p>
+
+                <!-- Afficher les étoiles en fonction de la note -->
+                <div class="stars">
+                    {% for i in "12345" %}
+                        <span class="star{% if i|add:'0' <= instance.note %} active{% endif %}">★</span>
+                    {% endfor %}
+                </div>
+
                 <p>{{ instance.body }}</p>
                 <div class="post_ticket">
                     <p>Ticket associé : {{ instance.ticket.uploader }}</p>
@@ -41,6 +48,11 @@
                         {% if instance.ticket.image %}
                             <img src="{{ instance.ticket.image.url }}">
                         {% endif %}
+                        <div class="button_post_action">
+                            {% if instance.ticket.id not in user_has_created_critique %}
+                                <a href="{% url 'create_critique_from_ticket' ticket_id=instance.ticket.id %}" class="button_create_critique">Créer une critique</a>
+                            {% endif %}
+                        </div>
                     </p>
                 </div>
             </div>

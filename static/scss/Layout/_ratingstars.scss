@@ -1,0 +1,18 @@
+/* Étoiles inactives */
+.star {
+    color: gray; /* Couleur des étoiles inactives */
+    font-size: 30px;
+}
+
+/* Étoiles actives */
+.star.active {
+    color: gold; /* Couleur des étoiles actives (pleines) */
+}
+
+/* CSS pour aligner les boutons de note horizontalement sur CritiqueForm */
+.note-buttons {
+    display: flex;
+    flex-direction: row; /* Aligne les boutons horizontalement */
+    justify-content:space-around;
+}
+

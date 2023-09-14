@@ -13,6 +13,12 @@ class TicketForm(forms.ModelForm):
 class CritiqueForm(forms.ModelForm):
     edit_critique = forms.BooleanField(widget=forms.HiddenInput, initial=True)
 
+    # Définissez les choix de note directement dans le formulaire
+    note = forms.ChoiceField(
+        label='Note',
+        choices=[(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')],
+        widget=forms.RadioSelect(attrs={'class': 'note-buttons'}),)
+
     class Meta:
         model = models.Critique
         fields = ['commentaire', 'note', 'body']

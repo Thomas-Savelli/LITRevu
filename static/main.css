@@ -1,3 +1,4 @@
+@charset "UTF-8";
 body {
   width: 100%;
   margin-left: auto;
@@ -494,4 +495,25 @@ textarea {
 .follow_list .followed_list li {
   list-style: none;
   line-height: 220%;
+}
+
+/* Étoiles inactives */
+.star {
+  color: gray;
+  /* Couleur des étoiles inactives */
+  font-size: 30px;
+}
+
+/* Étoiles actives */
+.star.active {
+  color: gold;
+  /* Couleur des étoiles actives (pleines) */
+}
+
+/* CSS pour aligner les boutons de note horizontalement sur CritiqueForm */
+.note-buttons {
+  display: flex;
+  flex-direction: row;
+  /* Aligne les boutons horizontalement */
+  justify-content: space-around;
 }
