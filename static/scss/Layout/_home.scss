@@ -3,7 +3,7 @@
     flex-direction: column;
     h2 {
         font-family: $fontfamily_principal;
-        color: $background_color;
+        color: $color_border;
         text-align: center;
         font-size: $fontsize_titre2;
         margin-top: 3%;
@@ -27,13 +27,5 @@
     img{
         width:20%;
         height: auto;
-    }
-    a{
-        text-decoration: none;
-        border: $color_base_3 solid 2px;
-        border-radius: 10px;
-        padding: 10px 10px 10px 10px;
-        background-color: $color_base_3;
-        color: $color_base;
     }
 }

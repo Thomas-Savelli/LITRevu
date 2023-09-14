@@ -10,19 +10,20 @@ body {
   flex-direction: row;
   align-items: center;
   color: white;
-  background-color: #C8841C;
+  background-image: url("images/watercolor-paper-texture.jpg");
+  background-position: center;
   width: 100%;
-  height: 12%;
+  height: 20%;
 }
 
 .header h1 {
-  padding-left: 20px;
+  padding-left: 100px;
   font-size: 40px;
   font-family: "Special Elite", cursive;
 }
 
 .header nav {
-  margin-left: 42%;
+  margin-left: 32%;
 }
 
 .header nav ul {
@@ -49,17 +50,17 @@ body {
   text-decoration: none;
   color: white;
   font-family: "Courier Prime", monospace;
-  font-size: 18px;
+  font-size: 22px;
 }
 
 .header nav ul li a:hover {
-  color: black;
+  color: #8ED5BE;
 }
 
 .header nav ul .sous_menu {
   display: none;
   position: absolute;
-  background-color: #C8841C;
+  background-image: url("images/watercolor-paper-texture.jpg");
   width: 200px;
 }
 
@@ -68,8 +69,7 @@ body {
 }
 
 .header nav ul .sous_menu li:hover a {
-  background-color: white;
-  color: #C8841C;
+  color: #8ED5BE;
 }
 
 .header .avatar {
@@ -77,6 +77,11 @@ body {
   width: 50px;
   border-radius: 50%;
   margin-right: 30px;
+  border: white solid 2px;
+}
+
+.header .avatar:hover {
+  border: #8ED5BE solid 2px;
 }
 
 .link_create {
@@ -93,10 +98,21 @@ body {
   text-decoration: none;
   font-size: 20px;
   padding: 10px 20px 10px 20px;
-  border: #C8841C solid 2px;
-  background-color: #C8841C;
+  border: #d36e70 solid 2px;
+  background-color: #d36e70;
   color: white;
   border-radius: 5px;
+}
+
+.link_create a:hover {
+  border: #d36e70 solid 2px;
+  color: #d36e70;
+  background-color: white;
+}
+
+.link_create a:active {
+  color: white;
+  background-color: #d36e70;
 }
 
 .button_post_action {
@@ -109,48 +125,54 @@ body {
 
 .button_post_action a {
   text-decoration: none;
-  border: red solid 2px;
+  border: #d36e70 solid 2px;
   border-radius: 10px;
   padding: 10px 10px 10px 10px;
-  background-color: red;
+  background-color: #d36e70;
   color: white;
 }
 
 .button_post_action a:hover {
-  color: red;
+  color: #d36e70;
   background-color: white;
-  border: red solid 2px;
+  border: #d36e70 solid 2px;
 }
 
 .button_post_action a:active {
   color: white;
-  background-color: red;
+  background-color: #d36e70;
 }
 
 .button_post_action .button_create_critique {
-  background-color: #C8841C;
-  border: #C8841C solid 2px;
+  background-color: #8ED5BE;
+  border: #8ED5BE solid 2px;
 }
 
 .button_post_action .button_create_critique:hover {
-  color: #C8841C;
+  color: #8ED5BE;
   background-color: white;
-  border: #C8841C solid 2px;
-}
-
-.button_post_action .button_create_critique:active {
-  color: white;
-  background-color: #C8841C;
-  border: #C8841C solid 2px;
+  border: #8ED5BE solid 2px;
 }
 
 button[type='submit'] {
   color: white;
-  background-color: red;
+  background-color: #d36e70;
   font-size: 20px;
   padding: 10px 10px 10px 10px;
-  border: red;
+  border: #d36e70;
   border-radius: 10px;
+}
+
+button[type='submit']:hover {
+  color: #d36e70;
+  border: #d36e70 solid 2px;
+  background-color: white;
+}
+
+button[type='submit']:active {
+  color: white;
+  background-color: #d36e70;
+  border: #d36e70 solid 2px;
 }
 
 input[type="file"] {
@@ -163,8 +185,21 @@ input[type="file"] {
   text-decoration: none;
   text-align: center;
   font-size: 20px;
-  color: #C8841C;
+  color: black;
   margin-bottom: 20px;
+}
+
+.button_comeback:hover {
+  color: #8ED5BE;
+}
+
+.button_action {
+  text-decoration: none;
+  border: #d36e70 solid 2px;
+  border-radius: 10px;
+  padding: 10px 10px 10px 10px;
+  background-color: #d36e70;
+  color: white;
 }
 
 #main {
@@ -174,7 +209,7 @@ input[type="file"] {
 
 #main h2 {
   font-family: "Special Elite", cursive;
-  color: #C8841C;
+  color: black;
   text-align: center;
   font-size: 30px;
   margin-top: 3%;
@@ -200,15 +235,6 @@ input[type="file"] {
 .post_ticket img {
   width: 20%;
   height: auto;
-}
-
-.post_ticket a {
-  text-decoration: none;
-  border: red solid 2px;
-  border-radius: 10px;
-  padding: 10px 10px 10px 10px;
-  background-color: red;
-  color: white;
 }
 
 /* forms.scss */
@@ -433,12 +459,18 @@ textarea {
 .search-user .search_results li {
   list-style: none;
   display: flex;
+  justify-content: space-between;
   gap: 20px;
+}
+
+.search-user .search_results li button[type='submit'] {
+  color: black;
+  padding: 2px 4px 2px 4px;
 }
 
 .follow_list {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   gap: 20%;
   margin-top: 10%;
@@ -454,6 +486,12 @@ textarea {
   justify-content: space-between;
 }
 
+.follow_list .user_followlist li button[type='submit'] {
+  color: black;
+  padding: 2px 4px 2px 4px;
+}
+
 .follow_list .followed_list li {
   list-style: none;
+  line-height: 220%;
 }

@@ -1,9 +1,12 @@
 // Variables pour les couleurs de l'application
 $color_base : white;
 $color_base_2 : black;
-$color_base_3 : red;
+$color_base_3 : #d36e70;
+$color_base_4 : #8ED5BE;
 $color_border : black;
 $background_color : #C8841C;
+
+$image_fond : url('images/watercolor-paper-texture.jpg');
 
 // Varaibles pour les polices de l'application
 $fontfamily_principal : 'Special Elite', cursive;
@@ -12,7 +15,7 @@ $fontfamily_text : 'Raleway', sans-serif;
 
 // Variables pour les tailles de text
 $fontsize_principal : 40px;
-$fontsize_nav : 18px;
+$fontsize_nav : 22px;
 $fontsize_titre2 : 30px;
 $fontsize_button : 20px;
 $fontsize_text: 18px;

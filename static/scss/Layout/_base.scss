@@ -3,16 +3,17 @@
     flex-direction: row;
     align-items: center;
     color: $color_base;
-    background-color: $background_color;
+    background-image: $image_fond;
+    background-position: center;
     width: 100%;
-    height: 12%;
+    height: 20%;
     h1{
-        padding-left: 20px;
+        padding-left: 100px;
         font-size: $fontsize_principal;
         font-family: $fontfamily_principal;
     }
     nav{
-        margin-left: 42%;
+        margin-left: 32%;
         ul{
             list-style: none;
             display: flex;
@@ -34,21 +35,20 @@
                     font-family: $fontfamily_nav;
                     font-size: $fontsize_nav;
                     &:hover {
-                        color: black;
+                        color: $color_base_4;
                     }
                 }
             }
         .sous_menu {
             display: none;
             position: absolute;
-            background-color: $background_color ;
+            background-image: $image_fond ;
             width: 200px;
             li {
                 display: block;
                 &:hover {
                     a {
-                        background-color: $color_base;
-                        color: $background_color;
+                        color: $color_base_4;
                     }
                 }
             }
@@ -60,5 +60,9 @@
         width: 50px;
         border-radius: 50%;
         margin-right: 30px;
+        border: $color_base solid 2px;
+        &:hover{
+            border: $color_base_4 solid 2px;
+        }
     }
 }

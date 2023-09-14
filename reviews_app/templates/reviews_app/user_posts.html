@@ -18,8 +18,8 @@
                 {% if instance.id not in tickets_with_critique %}
                     <p><a href="{% url 'create_critique_from_ticket' ticket_id=instance.id %}" class="button_create_critique">Créer une critique</a></p>
                 {% endif %}
-                <a href="{% url 'ticket_edit' ticket_id=instance.id %}">Modifier</a>
-                <a href="{% url 'ticket_delete' ticket_id=instance.id %}">Supprimer</a>
+                <a href="{% url 'ticket_edit' ticket_id=instance.id %}" class="button_action">Modifier</a>
+                <a href="{% url 'ticket_delete' ticket_id=instance.id %}" class="button_action">Supprimer</a>
             </div>
            
 

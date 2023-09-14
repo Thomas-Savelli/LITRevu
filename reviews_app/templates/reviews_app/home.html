@@ -17,8 +17,12 @@
                 {% if instance.image %}
                     <img src="{{ instance.image.url }}">
                 {% endif %}
-                    <p><a href="{% url 'create_critique_from_ticket' ticket_id=instance.id %}">Créer une critique</a></p>
+                <div class="button_post_action">
+                    {% if instance.id not in user_has_created_critique %}
+                        <a href="{% url 'create_critique_from_ticket' ticket_id=instance.id %}" class="button_create_critique">Créer une critique</a>
+                    {% endif %}
                 </div>
+            </div>
         {% endif %}
 
         {% if instance|model_type == 'Critique' %}

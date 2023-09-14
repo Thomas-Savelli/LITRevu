@@ -12,15 +12,26 @@ from authentication.models import User
 
 @login_required
 def home(request):
+    user = request.user
     tickets = models.Ticket.objects.filter(uploader__in=request.user.follows.all())
     critiques = models.Critique.objects.filter(
         Q(contributors__in=request.user.follows.all()) | Q(ticket__in=tickets)
         )
 
+    # Création d'une liste pour stocker les IDs des tickets pour lesquels l'utilisateur a créé une critique
+    user_has_created_critique = []
+
+    # Parcours les tickets pour vérifier si l'utilisateur a créé une critique
+    for ticket in tickets:
+        if models.Critique.objects.filter(ticket=ticket, author=user).exists():
+            # Si l'utilisateur a créé une critique pour ce ticket, ajouter son ID à la liste
+            user_has_created_critique.append(ticket.id)
+
     critiques_and_tickets = sorted(chain(critiques, tickets), key=lambda instance: instance.time_created, reverse=True)
 
     context = {
         'critiques_and_tickets': critiques_and_tickets,
+        'user_has_created_critique': user_has_created_critique,
     }
     return render(request, 'reviews_app/home.html', context=context)
 

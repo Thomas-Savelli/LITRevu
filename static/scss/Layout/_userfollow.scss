@@ -9,14 +9,19 @@
         li{
             list-style: none;
             display: flex;
+            justify-content: space-between;
             gap: 20px;
+            button[type='submit']{
+                color: black;
+                padding: 2px 4px 2px 4px;
+            }
         }
     }
 }
 
 .follow_list{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     gap: 20%;
     margin-top: 10%;
@@ -28,11 +33,16 @@
             list-style: none;
             display: flex;
             justify-content: space-between;
+            button[type='submit']{
+                color: black;
+                padding: 2px 4px 2px 4px;
+            }
         }
     }
     .followed_list{
        li{
         list-style: none;
+        line-height: 220%;
        }
     }
 }
