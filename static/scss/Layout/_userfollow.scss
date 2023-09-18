@@ -4,6 +4,15 @@
     height: auto;
     .search_button{
         margin-left: 42%;
+        color: $color_base_2;
+        border: $color_base_2 solid 1px;
+        background-color: $color_base;
+        padding: 2px 4px 2px 4px;
+        &:hover{
+            color: $color_base;
+            background-color: $color_base_3;
+            border: $color_base_3 solid 1px;
+        }
     }
     .search_results{
         li{
@@ -11,9 +20,16 @@
             display: flex;
             justify-content: space-between;
             gap: 20px;
-            button[type='submit']{
-                color: black;
-                padding: 2px 4px 2px 4px;
+        }
+        button[type='submit']{
+            color: $color_base_2;
+            border: $color_base_2 solid 1px;
+            background-color: $color_base;
+            padding: 2px 4px 2px 4px;
+            &:hover{
+                color: $color_base;
+                background-color: $color_base_3;
+                border: $color_base_3 solid 1px;
             }
         }
     }
@@ -34,8 +50,15 @@
             display: flex;
             justify-content: space-between;
             button[type='submit']{
-                color: black;
+                color: $color_base_2;
+                background-color: $color_base;
+                border: $color_base_2 solid 1px;
                 padding: 2px 4px 2px 4px;
+                &:hover{
+                    color: $color_base;
+                    background-color: $color_base_3;
+                    border: $color_base_3 solid 1px;
+                }
             }
         }
     }

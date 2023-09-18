@@ -18,7 +18,9 @@
                     <img src="{{ instance.image.url }}">
                 {% endif %}
                 <div class="button_post_action">
-                    {% if instance.id not in user_has_created_critique %}
+                    {% if instance.id in user_has_created_critique or instance.uploader == request.user %}
+                        <!-- Ne rien afficher ici car l'utilisateur a déjà créé une critique -->
+                    {% else %}
                         <a href="{% url 'create_critique_from_ticket' ticket_id=instance.id %}" class="button_create_critique">Créer une critique</a>
                     {% endif %}
                 </div>
@@ -49,11 +51,12 @@
                             <img src="{{ instance.ticket.image.url }}">
                         {% endif %}
                         <div class="button_post_action">
-                            {% if instance.ticket.id not in user_has_created_critique %}
+                            {% if instance.ticket.id in user_has_created_critique or instance.ticket.uploader == request.user %}
+                                <!-- Ne rien afficher ici car l'utilisateur a déjà créé une critique -->
+                            {% else %}
                                 <a href="{% url 'create_critique_from_ticket' ticket_id=instance.ticket.id %}" class="button_create_critique">Créer une critique</a>
                             {% endif %}
                         </div>
-                    </p>
                 </div>
             </div>
         {% endif %} 

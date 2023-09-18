@@ -40,7 +40,7 @@
                             {{ user.username }}
                             <form method="post" action="{% url 'unfollow_user' user.pk %}">
                                 {% csrf_token %}
-                                <button type="submit">Ne plus suivre</button>
+                                <button type="submit">Désabonner</button>
                             </form>
                         </li>
 

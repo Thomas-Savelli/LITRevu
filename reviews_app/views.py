@@ -7,18 +7,25 @@ from django.db.models import Q
 from . import models, forms
 from .forms import SearchUsersForm
 from authentication.models import User
-# Create your views here.
 
 
 @login_required
 def home(request):
     user = request.user
-    tickets = models.Ticket.objects.filter(uploader__in=request.user.follows.all())
-    critiques = models.Critique.objects.filter(
-        Q(contributors__in=request.user.follows.all()) | Q(ticket__in=tickets)
-        )
+    # Récupérez les tickets associés à l'utilisateur connecté
+    user_tickets = models.Ticket.objects.filter(uploader=user)
 
-    # Création d'une liste pour stocker les IDs des tickets pour lesquels l'utilisateur a créé une critique
+    # Récupérez les critiques de l'utilisateur connecté
+    user_critiques = models.Critique.objects.filter(author=user)
+
+    # Récupérez les tickets et critiques associés aux utilisateurs suivis
+    tickets = models.Ticket.objects.filter(uploader__in=request.user.follows.all())
+
+    # Récupérez les critiques associées aux utilisateurs suivis
+    critiques = models.Critique.objects.filter(
+        Q(contributors__in=request.user.follows.all()) | Q(ticket__in=tickets)).exclude(author=user)
+
+    # Créez une liste pour stocker les IDs des tickets pour lesquels l'utilisateur a créé une critique
     user_has_created_critique = []
 
     # Parcours les tickets pour vérifier si l'utilisateur a créé une critique
@@ -27,8 +34,13 @@ def home(request):
             # Si l'utilisateur a créé une critique pour ce ticket, ajouter son ID à la liste
             user_has_created_critique.append(ticket.id)
 
-    critiques_and_tickets = sorted(chain(critiques, tickets), key=lambda instance: instance.time_created, reverse=True)
-
+    # Combinez les tickets et critiques de l'utilisateur connecté, ainsi que ceux des utilisateurs suivis,
+    critiques_and_tickets = sorted(
+        chain(user_tickets, critiques, tickets, user_critiques),
+        key=lambda instance: instance.time_created,
+        reverse=True
+    )
+    print(critiques_and_tickets)
     context = {
         'critiques_and_tickets': critiques_and_tickets,
         'user_has_created_critique': user_has_created_critique,

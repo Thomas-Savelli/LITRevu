@@ -10,14 +10,14 @@
         text-decoration: none;
         font-size: $fontsize_button;
         padding: 10px 20px 10px 20px;
-        border: $color_base_3 solid 2px;
-        background-color: $color_base_3;
-        color: $color_base;
+        border: $color_base_2 solid 2px;
+        background-color: $color_base;
+        color: $color_base_2;
         border-radius: 5px;
         &:hover{
             border: $color_base_3 solid 2px;
-            color: $color_base_3;
-            background-color: $color_base;
+            color: $color_base;
+            background-color: $color_base_3;
         }
         &:active{
             color: $color_base;
@@ -34,28 +34,25 @@
     gap: 5%;
     a{
         text-decoration: none;
-        border: $color_base_3 solid 2px;
+        border: $color_base_2 solid 2px;
         border-radius: 10px;
         padding: 10px 10px 10px 10px;
-        background-color: $color_base_3;
-        color: $color_base;
+        background-color: $color_base;
+        color: $color_base_2;
         &:hover{
-            color: $color_base_3;
-            background-color: $color_base;
-            border: $color_base_3 solid 2px;
-        }
-        &:active{
             color: $color_base;
             background-color: $color_base_3;
+            border: $color_base_3 solid 2px;
         }
     }
     .button_create_critique{
-        background-color: $color_base_4;
-        border: $color_base_4 solid 2px;
+        color: $color_base_2;
+        background-color: $color_base;
+        border: $color_base_2 solid 2px;
         &:hover{
-            color: $color_base_4;
-            background-color: $color_base;
-            border: $color_base_4 solid 2px;
+            color: $color_base;
+            background-color: $color_base_3;
+            border: $color_base_3 solid 2px;
         }
     }
 }
@@ -90,18 +87,18 @@ input[type="file"] {
     text-decoration: none;
     text-align: center;
     font-size: $fontsize_button;
-    color: $color_border;
+    color: $color_base_2;
     margin-bottom: 20px;
     &:hover{
-        color: $color_base_4;
+        color: $color_base_3;
     }
 }
 
 .button_action{
     text-decoration: none;
-    border: $color_base_3 solid 2px;
+    border: $color_base_2 solid 2px;
     border-radius: 10px;
     padding: 10px 10px 10px 10px;
-    background-color: $color_base_3;
-    color: $color_base;
+    background-color: $color_base;
+    color: $color_base_2;
 }

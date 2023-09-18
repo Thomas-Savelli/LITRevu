@@ -99,16 +99,16 @@ body {
   text-decoration: none;
   font-size: 20px;
   padding: 10px 20px 10px 20px;
-  border: #d36e70 solid 2px;
-  background-color: #d36e70;
-  color: white;
+  border: black solid 2px;
+  background-color: white;
+  color: black;
   border-radius: 5px;
 }
 
 .link_create a:hover {
   border: #d36e70 solid 2px;
-  color: #d36e70;
-  background-color: white;
+  color: white;
+  background-color: #d36e70;
 }
 
 .link_create a:active {
@@ -126,33 +126,29 @@ body {
 
 .button_post_action a {
   text-decoration: none;
-  border: #d36e70 solid 2px;
+  border: black solid 2px;
   border-radius: 10px;
   padding: 10px 10px 10px 10px;
-  background-color: #d36e70;
-  color: white;
+  background-color: white;
+  color: black;
 }
 
 .button_post_action a:hover {
-  color: #d36e70;
-  background-color: white;
+  color: white;
+  background-color: #d36e70;
   border: #d36e70 solid 2px;
 }
 
-.button_post_action a:active {
-  color: white;
-  background-color: #d36e70;
-}
-
 .button_post_action .button_create_critique {
-  background-color: #8ED5BE;
-  border: #8ED5BE solid 2px;
+  color: black;
+  background-color: white;
+  border: black solid 2px;
 }
 
 .button_post_action .button_create_critique:hover {
-  color: #8ED5BE;
-  background-color: white;
-  border: #8ED5BE solid 2px;
+  color: white;
+  background-color: #d36e70;
+  border: #d36e70 solid 2px;
 }
 
 button[type='submit'] {
@@ -191,16 +187,16 @@ input[type="file"] {
 }
 
 .button_comeback:hover {
-  color: #8ED5BE;
+  color: #d36e70;
 }
 
 .button_action {
   text-decoration: none;
-  border: #d36e70 solid 2px;
+  border: black solid 2px;
   border-radius: 10px;
   padding: 10px 10px 10px 10px;
-  background-color: #d36e70;
-  color: white;
+  background-color: white;
+  color: black;
 }
 
 #main {
@@ -264,7 +260,7 @@ textarea {
 
 .password_form label {
   display: block;
-  color: #C8841C;
+  color: black;
   font-size: 30px;
   margin-bottom: 5px;
 }
@@ -455,6 +451,16 @@ textarea {
 
 .search-user .search_button {
   margin-left: 42%;
+  color: black;
+  border: black solid 1px;
+  background-color: white;
+  padding: 2px 4px 2px 4px;
+}
+
+.search-user .search_button:hover {
+  color: white;
+  background-color: #d36e70;
+  border: #d36e70 solid 1px;
 }
 
 .search-user .search_results li {
@@ -464,9 +470,17 @@ textarea {
   gap: 20px;
 }
 
-.search-user .search_results li button[type='submit'] {
+.search-user .search_results button[type='submit'] {
   color: black;
+  border: black solid 1px;
+  background-color: white;
   padding: 2px 4px 2px 4px;
+}
+
+.search-user .search_results button[type='submit']:hover {
+  color: white;
+  background-color: #d36e70;
+  border: #d36e70 solid 1px;
 }
 
 .follow_list {
@@ -489,7 +503,15 @@ textarea {
 
 .follow_list .user_followlist li button[type='submit'] {
   color: black;
+  background-color: white;
+  border: black solid 1px;
   padding: 2px 4px 2px 4px;
+}
+
+.follow_list .user_followlist li button[type='submit']:hover {
+  color: white;
+  background-color: #d36e70;
+  border: #d36e70 solid 1px;
 }
 
 .follow_list .followed_list li {
