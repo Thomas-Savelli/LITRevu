@@ -7,8 +7,14 @@
     {% for instance in critiques_and_tickets %}
     {% if instance|model_type == 'Ticket' %}
         <div class="post_ticket">
-            <p>{{ instance.uploader }} a demandé une critique</p>
-            <p>{{ instance.time_created }}</p>
+            <div class="head_box">
+                {% if instance.uploader == request.user %}
+                    <p>Vous avez demandé une critique </p>
+                {% else %}
+                    <p>{{ instance.uploader }} a demandé une critique</p>
+                {% endif %}
+                <p>{{ instance.time_created }}</p>
+            </div>
             <p>{{ instance.title }}</p>
             <p>{{ instance.description }}</p>
             {% if instance.image %}
@@ -28,19 +34,24 @@
 
     {% if instance|model_type == 'Critique' %}
         <div class="post_ticket">
-            <div class="head_ticket">
-                <p>{{ instance.author }} a publié une critique</p>
+            <div class="head_box">
+                {% if instance.author == request.user %}
+                    <p>Vous avez publié une critique</p>
+                {% else %}
+                    <p>{{ instance.author }} a publié une critique</p>
+                {% endif %}
                 <p>{{ instance.time_created }}</p>
             </div>
-            <p>{{ instance.commentaire }}</p>
+            <div class="critique_comment">
+                <p>{{ instance.commentaire }} -</p>
 
-            <!-- Afficher les étoiles en fonction de la note -->
-            <div class="stars">
-                {% for i in "12345" %}
-                    <span class="star{% if i|add:'0' <= instance.note %} active{% endif %}">★</span>
-                {% endfor %}
+                <!-- Afficher les étoiles en fonction de la note -->
+                <div class="stars">
+                    {% for i in "12345" %}
+                        <span class="star{% if i|add:'0' <= instance.note %} active{% endif %}">★</span>
+                    {% endfor %}
+                </div>
             </div>
-
             <p>{{ instance.body }}</p>
             <div class="post_ticket">
                 <p>Ticket associé : {{ instance.ticket.uploader }}</p>

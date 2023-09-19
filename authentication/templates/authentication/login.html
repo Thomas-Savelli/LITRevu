@@ -2,8 +2,8 @@
 {% block content %}
 <div class="login_form">
     <div class="block_inscription">
-        <h2>Inscrivez-vous maintenant !</h2>
-        <button><a class="button_signup" href="{% url 'signup' %}">S'inscrire</a></button>
+        <h2>Inscrivez-vous</h2>
+        <a class="button_signup" href="{% url 'signup' %}">S'inscrire</a>
     </div>
     <div class="block_login">
         <h2>Connectez-vous</h2>
@@ -11,7 +11,7 @@
         <form method="post">
             {{ form.as_p }}
             {% csrf_token %}
-            <button type="submit" class="button_comeback">Se connecter</button>
+            <button type="submit" class="button_login">Se connecter</button>
         </form>
     </div> 
 </div>

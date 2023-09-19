@@ -97,30 +97,58 @@ textarea {
 
 .login_form{
     text-decoration: none;
-    margin: auto;
-    margin-top: 10%;
+    margin-top: 8%;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    width: 100%;
+    height: auto;
     gap: 10%;
-    button{
-        width: 140px;
-        font-size: $fontsize_button;
-        margin-top: 8%;
-        margin-left: 35%;
-    }
-    input[type="password"], textarea{
-        padding: 8px;
-        border-radius: 3px;
-        margin-bottom: 10px;
-        border: black solid 2px;
-        width: 100%;
+    .block_inscription{
+        width: 30%;
         height: auto;
-        // width: 100%; /* Utilisez cette ligne pour que les champs occupent toute la largeur */
-
-        /* Augmenter la taille du texte */
-        font-size: $fontsize_text;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
+    .block_login{
+        width: 30%;
+        height: auto;
+        text-align: center;
+    }
+    .button_signup, .button_login{
+        text-decoration: none;
+        font-size: $fontsize_button;
+        text-decoration: none;
+        padding: 10px 20px 10px 20px;
+        border: $color_base_2 solid 2px;
+        background-color: $color_base;
+        color: $color_base_2;
+        border-radius: 5px;
+        &:hover{
+            border: $color_base_3 solid 2px;
+            color: $color_base;
+            background-color: $color_base_3;
+        }
+        &:active{
+            color: $color_base;
+            background-color: $color_base_3;
+        }
+    }
+}
+
+input[type="password"], textarea{
+    padding: 8px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    border: black solid 2px;
+    width: 100%;
+    height: auto;
+    // width: 100%; /* Utilisez cette ligne pour que les champs occupent toute la largeur */
+
+    /* Augmenter la taille du texte */
+    font-size: $fontsize_text;
 }
 
 .signup_form{
@@ -132,7 +160,7 @@ textarea {
     gap: 10%;
     width: 40%;
     label {
-        color: $background_color;
+        color: $color_base_2;
         font-size: $fontsize_titre2;
         display: block;
         margin-bottom: 5px;
@@ -142,7 +170,7 @@ textarea {
         width: 140px;
         font-size: $fontsize_button;
         margin-top: 8%;
-        margin-left: 35%;
+        margin-left: 38%;
     }
     input[type="password"],
     input[type="email"],

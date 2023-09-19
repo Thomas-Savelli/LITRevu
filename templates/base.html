@@ -10,6 +10,7 @@
     </head>
     <body>
         <div class="header">
+            <img alt="logo de LITRevu" src="{% static 'images/logo-blanc.png'%}" class="image_logo">
             <h1>LITRevu</h1>
             {% if user.is_authenticated %}
                 <nav>
@@ -21,7 +22,7 @@
                             {% if user.profile_photo %}
                                 <a><img class="avatar" src="{{ user.profile_photo.url }}"></a>
                             {% else %}
-                                <a><img class="avatar" src="{% static 'images/default_profile.png'%}"></a>
+                                <a><img class="avatar" alt="photo profile utilisateur" src="{% static 'images/default_profile.png'%}"></a>
                             {% endif %}
                             <ul class="sous_menu">
                                 <li><a href="{% url 'upload_profile_photo' %}">Photo profil</a></li>

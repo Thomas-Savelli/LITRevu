@@ -19,10 +19,23 @@
     font-size: $fontsize_text;
     padding: 10px 20px 20px 20px;
     border: black solid 2px;
-    .head_ticket{
+    .head_box{
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
+        justify-content: space-between;
+    }
+    .critique_comment{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        p{
+            font-size: $fontsize_critique;
+            font-family: $fontfamily_text;
+            font-weight: bold;
+        }
+        .stars{
+            margin-left: 20px;
+        }
     }
     img{
         width:20%;

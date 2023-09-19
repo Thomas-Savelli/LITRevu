@@ -17,8 +17,14 @@ body {
   height: 20%;
 }
 
+.header .image_logo {
+  height: 80%;
+  width: auto;
+  margin-left: 30px;
+}
+
 .header h1 {
-  padding-left: 100px;
+  padding-left: 30px;
   font-size: 40px;
   font-family: "Special Elite", cursive;
 }
@@ -223,10 +229,26 @@ input[type="file"] {
   border: black solid 2px;
 }
 
-.post_ticket .head_ticket {
+.post_ticket .head_box {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
+}
+
+.post_ticket .critique_comment {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.post_ticket .critique_comment p {
+  font-size: 20px;
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
+}
+
+.post_ticket .critique_comment .stars {
+  margin-left: 20px;
 }
 
 .post_ticket img {
@@ -337,22 +359,53 @@ textarea {
 
 .login_form {
   text-decoration: none;
-  margin: auto;
-  margin-top: 10%;
+  margin-top: 8%;
   display: flex;
   flex-direction: row;
   justify-content: center;
+  width: 100%;
+  height: auto;
   gap: 10%;
 }
 
-.login_form button {
-  width: 140px;
-  font-size: 20px;
-  margin-top: 8%;
-  margin-left: 35%;
+.login_form .block_inscription {
+  width: 30%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
-.login_form input[type="password"], .login_form textarea {
+.login_form .block_login {
+  width: 30%;
+  height: auto;
+  text-align: center;
+}
+
+.login_form .button_signup, .login_form .button_login {
+  text-decoration: none;
+  font-size: 20px;
+  text-decoration: none;
+  padding: 10px 20px 10px 20px;
+  border: black solid 2px;
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+}
+
+.login_form .button_signup:hover, .login_form .button_login:hover {
+  border: #d36e70 solid 2px;
+  color: white;
+  background-color: #d36e70;
+}
+
+.login_form .button_signup:active, .login_form .button_login:active {
+  color: white;
+  background-color: #d36e70;
+}
+
+input[type="password"], textarea {
   padding: 8px;
   border-radius: 3px;
   margin-bottom: 10px;
@@ -374,7 +427,7 @@ textarea {
 }
 
 .signup_form label {
-  color: #C8841C;
+  color: black;
   font-size: 30px;
   display: block;
   margin-bottom: 5px;
@@ -385,7 +438,7 @@ textarea {
   width: 140px;
   font-size: 20px;
   margin-top: 8%;
-  margin-left: 35%;
+  margin-left: 38%;
 }
 
 .signup_form input[type="password"],

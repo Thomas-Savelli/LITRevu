@@ -40,7 +40,7 @@ def home(request):
         key=lambda instance: instance.time_created,
         reverse=True
     )
-    print(critiques_and_tickets)
+
     context = {
         'critiques_and_tickets': critiques_and_tickets,
         'user_has_created_critique': user_has_created_critique,
@@ -98,6 +98,7 @@ def critique_and_ticket_create(request):
             ticket.save()
             critique = critique_form.save(commit=False)
             critique.author = request.user
+            critique.ticket = ticket  # Associe la critique au ticket
             critique.save()
             critique.contributors.add(request.user, through_defaults={'contribution': 'Auteur principal'})
         return redirect('home')
